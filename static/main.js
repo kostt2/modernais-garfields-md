@@ -231,12 +231,12 @@ class Galvaspilsetas {
       pareizo_skaits +
       " no " +
       jautajumu_skaits +
-      " iespējamajiem. <br><br>";
+      " iespējamajiem. </br></br>";
       // (jaut_nr + 1) +
       // ". jautājums no " +
       // jautajumu_skaits +
-      // "<br><br>";
-    this.divJautajums.innerHTML = "<b>" + (jaut_nr + 1) + ". " + vgk[nr[jaut_nr][0]][1] + "</b><br>";
+      // "</br></br>";
+    this.divJautajums.innerHTML = "<b>" + (jaut_nr + 1) + ". " + vgk[nr[jaut_nr][0]][1] + "</b></br>";
     this.divKarogi.setAttribute("src", vgk[nr[jaut_nr][0]][3]);
     this.divJautajums.appendChild(this.divKarogi);
     //Funkcija Random_jautajumi strādā tā, ka pareizā atbildē vienmēr ir 0.pozīcijā
@@ -254,9 +254,9 @@ class Galvaspilsetas {
       this.radioVar.setAttribute("type", "radio");
       this.radioVar.setAttribute("name", "r1");
       this.radioVar.setAttribute("value", ii);
-      this.radioVar.setAttribute("id", `radio${ii}`);
+      this.radioVar.setAttribute("id", 'radio${ii}');
       this.radioVar.onchange = () => (this.izvele = ii);
-      this.radioLabel.setAttribute("for", `radio${ii}`);
+      this.radioLabel.setAttribute("for", 'radio${ii}');
       str1 = vgk[nr[jaut_nr][ii]][2];
       str1 = str1.concat("</br>");
       this.radioLabel.innerHTML = str1;
@@ -299,7 +299,7 @@ class Galvaspilsetas {
         pareizo_skaits +
         " no " +
         jautajumu_skaits +
-        ". <br> <img src='static/images/congratulation.jpg'>";
+        ". </br> <img src='static/images/congratulation.jpg'>";
       statistika()
       }
     }
