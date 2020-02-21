@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, json, jsonify, make_response
 #from flask_cors import CORS, cross_origin
-app = Flask(__name__)
+app = Flask('app')
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 import csv
@@ -197,42 +197,6 @@ def suuti_zinju():
   return ielasit_chatu()
 
 
-   
-@app.route('/usertop', methods=['GET', 'POST'])
-def usertop():
-   print('izsaukums atnaca usertop dati')
-   usertop = False
-   j = json.loads(request.data)
-   print(j['mtop'])
-
-   with open('statistika.csv', 'r', encoding='UTF-8') as csvfile:
-      csv_reader = csv.reader(csvfile, delimiter = ';')
-      mtopx = j['mtop']
-      print(mtopx)
-      
-      for row in csv_reader:
-         if mtop in row[0]:
-            print(row)
-            usertop = True
-# ierakstam izveletos datus datne
-#            with open('qryx.csv', 'a', newline="", encoding='UTF-8') as csvfile:
-#                csv_writer = csv.writer(csvfile, delimiter=';')
-#                addqry = [row]
-#                csv_writer.writerows(addqry)
-#                csvfile.close()   
-            
-   if usertop == True:
-        print ("UTOP_Izdevas__")
-        myresp = jsonify({"usertop1":row})
-   else:
-        print ("Neizdevas__")
-        myresp = 'NEIZDEVAS'
-   return (myresp)
-#   usertop1_rindas = []
-#   with open("statistika.csv", "r", encoding="UTF-8") as utopf:
-#       for rinda in utopf:
-#           usertop1_rindas.append(rinda)
-#   return jsonify({"usertop1":usertop1_rindas})
 
 
 
