@@ -7,7 +7,7 @@ def root():
     return render_template('index.html')
 
 # parbaude loginam - vai eksiste user
-@app.route('/yn', methods=['GET', 'POST'])
+@app.route('/yn', methods=['POST'])
 def login():
 #   print('izsaukums atnaca dati')
    login = False
@@ -38,7 +38,7 @@ def login():
    return (myresp)
 
 #logina parbaude   
-@app.route('/lgnchk', methods=['GET', 'POST'])
+@app.route('/lgnchk', methods=['POST'])
 def lgnchk():
 #   print('izsaukums atnaca dati')
    lgnchk = True
@@ -67,7 +67,7 @@ def lgnchk():
    return (myresp)
 
 # registracija   
-@app.route('/rgstr', methods=['GET', 'POST'])
+@app.route('/rgstr', methods=['POST'])
 def rgstr():
 #   print('izsaukums atnaca dati')
    rgstr = False
@@ -104,7 +104,7 @@ def rgstr():
    return (myresp)
 
 #statistikas izveide   
-@app.route('/sttstk', methods=['GET', 'POST'])
+@app.route('/sttstk', methods=['POST'])
 def sttstk():
 #   print('izsaukums atnaca dati')
    sttstk = False
@@ -148,7 +148,7 @@ def sttstk():
    return (myresp)
    
 # atlase 
-@app.route('/qry', methods=['GET', 'POST'])
+@app.route('/qry', methods=['POST'])
 def qry():
 #   print('izsaukums atnaca dati')
    qry = False
