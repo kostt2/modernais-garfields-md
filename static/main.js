@@ -258,7 +258,7 @@ class Galvaspilsetas {
       this.radioVar.onchange = () => (this.izvele = ii);
       this.radioLabel.setAttribute("for", `radio${ii}`);
       str1 = vgk[nr[jaut_nr][ii]][2];
-      str1 = str1.concat("<br>");
+      str1 = str1.concat("</br>");
       this.radioLabel.innerHTML = str1;
       this.divAtbilzuVar.appendChild(this.radioVar);
       this.divAtbilzuVar.appendChild(this.radioLabel);
