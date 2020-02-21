@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>Spēle</title>
-    <link rel="stylesheet" href="stili.css" />
-    <script type="text/javascript" charset="UTF-8" src="JS/vgkvisi.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="main.js"></script>
+    <link rel="stylesheet" href="static/stili.css" />
+    <script type="text/javascript" charset="UTF-8" src="static/vgkvisi.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="static/main.js"></script>
     <link href="{{ url_for('static',filename='favicon.ico')}}" rel="icon" type="image/x-icon"/>
   </head>
   <body onload="lasiChatu();" class="body">
     <script src="{{ url_for('static',filename='chats.js')}}" type="text/javascript"></script>
     <div id="header">
-      <a href="index.html"><img src="images/header_img.png"/></a>
+      <a href="index.html"><img src="static/images/header_img.png"/></a>
     </div>
 
     <div id="main">
@@ -51,7 +51,7 @@
       <div id="konteiners">
         <div id="textblock">
           <h1>Par spēli</h1>
-          <img src="images/knb.jpg" alt="Kuroko and Nigou" />
+          <img src="static/images/knb.jpg" alt="Kuroko and Nigou" />
           <p>
             Pilsētu kultūra, valodas un tradīcijas ir ļoti dažādas un
             atšķirīgas, bet vai tu vari atpazīt šo valstu galvaspilsētas,
@@ -74,15 +74,15 @@
           </div>
             </br>
           <a href="https://www.youtube.com/user/jaunogeografuskola" target="_blank">
-            <img src="images/youtubelogo.jpg" alt="YouTube" />
+            <img src="static/images/youtubelogo.jpg" alt="YouTube" />
           </a>
 
           <a href="https://www.facebook.com/pg/Jauno.geografu.skola/about/" target="_blank">
-            <img src="images/facebook.png" alt="Deviantart" />
+            <img src="static/images/facebook.png" alt="Deviantart" />
           </a>
 
           <a href="https://twitter.com/jgs_lv" target="_blank">
-            <img src="images/twitterlogo.jpg" alt="Twitter" />
+            <img src="static/images/twitterlogo.jpg" alt="Twitter" />
           </a>
 
           {% block saturs %}
