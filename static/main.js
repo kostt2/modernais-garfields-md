@@ -299,7 +299,7 @@ class Galvaspilsetas {
         pareizo_skaits +
         " no " +
         jautajumu_skaits +
-        ". <br> <img src='images/congratulation.jpg'>";
+        ". <br> <img src='static/images/congratulation.jpg'>";
       statistika()
       }
     }
