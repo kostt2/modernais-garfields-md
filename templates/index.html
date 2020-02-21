@@ -3,19 +3,11 @@
   <head>    
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" >-->
         <link href="{{ url_for('static', filename='stili.css') }}" rel="stylesheet" >
         <link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon" type="image/x-icon" />
         <script src="{{ url_for('static', filename='chats.js') }}" type="text/javascript"></script>
         <script src="{{ url_for('static', filename='vgkvisi.js') }}" type="text/javascript"></script>
         <script src="{{ url_for('static', filename='main.js') }}" type="text/javascript"></script>
-<!--    <script type="text/javascript" charset="UTF-8" src="static/vgkvisi.js"></script>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/stili.css" />
-    <script type="text/javascript" charset="UTF-8" src="static/main.js"></script> 
-    <script src="{{ url_for('static',filename='chats.js')}}" type="text/javascript"></script>
-    <link href="{{ url_for('static',filename='favicon.ico')}}" rel="icon" type="image/x-icon"/>-->
       <title>Spēle</title>
     </head>
   <body onload="lasiChatu();" class="body">
@@ -38,7 +30,6 @@
         <button class="poga" onclick="neregistrejoties()" title="Sākt spēli bez reģistrācijas">Sākt tagad</button>  
 
         <div id="idRegistracija" class="modal">
-          <!--<span onclick="document.getElementById('idRegistracija').style.display='none'" class="close" title="Close Modal">&times;</span>-->
           <form onsubmit="return false" class="modal-content animate">
             <div class="container">
               <input type="text" placeholder="Lietotāja vārds" id="runame" required>
@@ -46,16 +37,9 @@
               <input type="password" placeholder="Parole atkārtoti" id="rpsw2" required>  
               <button type="submit" class="poga" onclick="lgnpsscheck()">Reģistrēties</button>
               <button type="button" class="poga" onclick="document.getElementById('idRegistracija').style.display='none'" class="cancelbtn">Atcelt</button>              
-              <!--<p align="center">* Ja nevēlaties reģistrēties, izmantojiet&emsp;<i>Lietotāja vārds:</i><b><i>Viesis</i></b>&emsp;<i>Parole:</i><b><i>Viesis</i></b></p><br>-->
             </div>        
           </form>
         </div>
-
-        <!--<ul>
-          <li>
-            <button class="poga" onclick="jaunaSpele()">Sākt spēli!</button>
-          </li>
-        </ul>-->
       </div>
 
       <div id="konteiners">

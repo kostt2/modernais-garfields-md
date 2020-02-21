@@ -198,3 +198,4 @@ let vgk = [
 [ 'ZW', 'Zimbabves Republika', 'Harare', 'https://flagpedia.net/data/flags/w580/zw.png'], 
 [ 'SE', 'Zviedrijas Karaliste', 'Stokholma', 'https://flagpedia.net/data/flags/w580/se.png'], 
     ];
+    

@@ -27,7 +27,6 @@ function Top10(){
 }
 
 function ieiet_visiem(){
-  //var LietotajaVards = document.getElementById("uname").value;
   this.leftBox = document.getElementById("left-sidebar");
   this.leftBox.innerHTML = "";
   this.divUzruna = document.createElement("div");
@@ -36,11 +35,7 @@ function ieiet_visiem(){
   this.h2 = document.createElement("h2");
   this.h2.setAttribute("id","h2");
   this.leftBox.appendChild(this.h2);
-  //h2.innerHTML = LietotajaVards;
 
-  //this.leftBox = document.getElementById("left-sidebar");
-  //ieiet_visiem();
-  //h2.innerHTML=LietotajaVards;
   this.jauna_spele = document.createElement("BUTTON");
   this.jauna_spele.setAttribute("class", "poga");
   this.jauna_spele.innerHTML = "Jauna spēle";
@@ -92,7 +87,6 @@ function reiting(){
   const xhr = new XMLHttpRequest(),
     method = 'POST',
     url = 'https://md-gr.herokuapp.com/qry';
-
       xhr.open(method, url, true);
       xhr.onreadystatechange = function () {
       if(xhr.readyState == 4 && xhr.status == 200) {
@@ -110,11 +104,9 @@ function login(){
   let lgndata = new Object();
   lgndata.uname = document.getElementById('uname').value;
   lgndata.pwd =  document.getElementById('psw').value ;
-
     const xhr = new XMLHttpRequest(),
     method = 'POST',
     url = 'https://md-gr.herokuapp.com/yn';
-
       xhr.open(method, url, true);
       xhr.onreadystatechange = function () {
       if(xhr.readyState == 4 && xhr.status == 200) {
@@ -132,7 +124,6 @@ xhr.send(JSON.stringify(lgndata));
 function lgnpsscheck(){
   let parole1 = document.getElementById("rpsw").value;
   let parole2 = document.getElementById("rpsw2").value;
-
   if(parole1!==parole2){
     alert("Paroles nesakrīt :(");
   }     
@@ -140,11 +131,9 @@ function lgnpsscheck(){
     //Pārbauda, vai tāds Lietotāja vārds ir brīvs...
       let regchkdata = new Object();
       regchkdata.runame = document.getElementById('runame').value;
-
       const xhr = new XMLHttpRequest(),
       method = 'POST',
       url = 'https://md-gr.herokuapp.com/lgnchk';
-  
         xhr.open(method, url, true);
         xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
@@ -160,16 +149,13 @@ function lgnpsscheck(){
     }
   }
 
-
 function registracija(){
   let regdata = new Object();
   regdata.reguname = document.getElementById('runame').value;
   regdata.regpwd =  document.getElementById('rpsw').value;
-    
   const xhrr = new XMLHttpRequest(),
     method = 'POST',
     url = 'https://md-gr.herokuapp.com/rgstr';
-
       xhrr.open(method, url, true);
       xhrr.onreadystatechange = function () {
       if(xhrr.readyState == 4 && xhrr.status == 200) {
@@ -232,10 +218,6 @@ class Galvaspilsetas {
       " no " +
       jautajumu_skaits +
       " iespējamajiem. </br></br>";
-      // (jaut_nr + 1) +
-      // ". jautājums no " +
-      // jautajumu_skaits +
-      // "</br></br>";
     this.divJautajums.innerHTML = "<b>" + (jaut_nr + 1) + ". " + vgk[nr[jaut_nr][0]][1] + "</b></br>";
     this.divKarogi.setAttribute("src", vgk[nr[jaut_nr][0]][3]);
     this.divJautajums.appendChild(this.divKarogi);
@@ -318,7 +300,6 @@ class Galvaspilsetas {
         sk = Math.floor(Math.random() * gar);
       } while (ir[sk]); //kamēr random skaitlis ir aizņemts, ģenerē nākamo
       nr[i][0] = sk; //ieraksta masīvā izvēlēto jautājuma numuru un PAREIZĀS galvaspilsētas numurs ir tieši tas pats
-      //console.log("nr[", i, "][0]=", nr[i][0]);
       ir[sk] = true;
       for (let j = 0; j < gar; j++) {
         //  Šis domāts atbilžu variantiem
@@ -332,44 +313,30 @@ class Galvaspilsetas {
         } while (irr[sk]);
         nr[i][j] = sk;
         irr[sk] = true;
-        //console.log("nr[", i, "][", j, "]=", nr[i][j]);
       }
-      // console.log("Nākamais jautājums!!!!!!!!!!!!!!!!");
     }
   }
 }
 
 function statistika(){
-
   let statok = pareizo_skaits;
   let jautno = jautajumu_skaits;
   let datumslaiks = new Date().toLocaleString('lv', {Hours: 'numeric', Minutes: 'long', Secundes: 'numeric'});
   var laiksb = new Date().getTime();
   let splslks = Math.round((laiksb - laikss)/1000);
   let rsltts = Math.round(statok*50000/splslks);
-
-let sttdata = new Object();
+  
+  let sttdata = new Object();
     sttdata.suname = h2.innerText;
     sttdata.jautno = jautno;
     sttdata.statok = statok;
     sttdata.datumslaiks = datumslaiks;
     sttdata.splslks = splslks;
     sttdata.rsltts = rsltts;
-/*
-console.log(h2.innerText);//+
-  console.log(statok); //+
-  console.log(jautno);  //+
-  console.log(datumslaiks); //+
-  console.log(laikss);
-  console.log(laiksb);
-  console.log(splslks);
-  console.log(rsltts);
-*/
   
 const xhrs = new XMLHttpRequest(),
   method = 'POST',
   url = 'https://md-gr.herokuapp.com/sttstk';
-
     xhrs.open(method, url, true);
     xhrs.onreadystatechange = function () {
     if(xhrs.readyState == 4 && xhrs.status == 200) {
@@ -383,6 +350,4 @@ const xhrs = new XMLHttpRequest(),
 xhrs.setRequestHeader("Access-Control-Allow-Origin", "*");
 xhrs.setRequestHeader("Content-type", "application/json, charset=utf-8");
 xhrs.send(JSON.stringify(sttdata));
-  
 }
-

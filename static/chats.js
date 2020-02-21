@@ -1,5 +1,3 @@
-//console.log("Sveiciens no konsoles");
-
 const ATJAUNOT = 1000; //5 sek
 
 async function lasiChatu(){
