@@ -5,6 +5,8 @@ let atbildes = [];
 let jaut_nr;
 let pareiza_atbilde;
 let pareizo_skaits;
+var laikss;
+var laiksb;
 let nr = []; //nodefinē viendimensiju masīvu
 for (let i = 0; i < 7; i++) {
   nr[i] = []; //nodefinē masīvam otru dimensiju; nr[i][0] - glabā jautājuma numuru un tur pat arī pareizo atbildi
@@ -16,13 +18,183 @@ function jaunaSpele() {
   g.inicializet();
 }
 
+function maniTop10(){
+
+}
+
+function Top10(){
+
+}
+
+function ieiet_visiem(){
+  //var LietotajaVards = document.getElementById("uname").value;
+  this.leftBox = document.getElementById("left-sidebar");
+  this.leftBox.innerHTML = "";
+  this.divUzruna = document.createElement("div");
+  this.divUzruna.setAttribute("id","uzruna");
+  this.leftBox.appendChild(this.divUzruna);
+  this.h2 = document.createElement("h2");
+  this.h2.setAttribute("id","h2");
+  this.leftBox.appendChild(this.h2);
+  //h2.innerHTML = LietotajaVards;
+
+  //this.leftBox = document.getElementById("left-sidebar");
+  //ieiet_visiem();
+  //h2.innerHTML=LietotajaVards;
+  this.jauna_spele = document.createElement("BUTTON");
+  this.jauna_spele.setAttribute("class", "poga");
+  this.jauna_spele.innerHTML = "Jauna spēle";
+  this.jauna_spele.onclick =  () => jaunaSpele();
+  this.leftBox.appendChild(this.jauna_spele);
+
+  this.mani_top10 = document.createElement("BUTTON");
+  this.mani_top10.setAttribute("class", "poga");
+  this.mani_top10.innerHTML = "Mani TOP 10";
+  this.mani_top10.onclick = () => maniTop10();
+  this.leftBox.appendChild(this.mani_top10);
+
+  this.top10 = document.createElement("BUTTON");
+  this.top10.setAttribute("class", "poga");
+  this.top10.innerHTML = "TOP 10";
+  this.top10.onclick = () => Top10();
+  this.leftBox.appendChild(this.top10);
+
+  this.beigt = document.createElement("BUTTON");
+  this.beigt.setAttribute("class", "poga");
+  this.beigt.innerHTML = "Beigt";
+  this.beigt.onclick = () => location.reload();
+  this.leftBox.appendChild(this.beigt);
+  
+  jaunaSpele();
+}
+
+function neregistrejoties(){
+  var LietotajaVards = "Viesis";
+  ieiet_visiem();
+  h2.innerHTML = LietotajaVards;
+}
+
+function ieiet(){
+  var LietotajaVards = document.getElementById("uname").value;
+  ieiet_visiem();
+  h2.innerHTML = LietotajaVards;
+}
+
+function ieiet2(){
+  var LietotajaVards = document.getElementById("runame").value;
+  ieiet_visiem();
+  h2.innerHTML = LietotajaVards;
+}
+
+function reiting(){
+  let qry = new Object();
+  qry.uname = h2.innerHTML;      
+  const xhr = new XMLHttpRequest(),
+    method = "POST",
+    url = "http://127.0.0.1:5000/qry";
+
+      xhr.open(method, url, true);
+      xhr.onreadystatechange = function () {
+      if(xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.responseText == 'OK'){
+          alert("OK"+ h2.innerHTML);
+         }
+      }
+    }
+xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhr.setRequestHeader("Content-type", "application/json, charset=utf-8");
+xhr.send(JSON.stringify(qry));
+} 
+
+function login(){
+  let lgndata = new Object();
+  lgndata.uname = document.getElementById('uname').value;
+  lgndata.pwd =  document.getElementById('psw').value ;
+
+    const xhr = new XMLHttpRequest(),
+    method = "POST",
+    url = "http://127.0.0.1:5000/yn";
+
+      xhr.open(method, url, true);
+      xhr.onreadystatechange = function () {
+      if(xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.responseText == 'JAA'){
+         return ieiet();
+         }
+         return alert("Jūsu lietotājvārds/parole nederīgi!!!")
+      }
+    }
+xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhr.setRequestHeader("Content-type", "application/json, charset=utf-8");
+xhr.send(JSON.stringify(lgndata));
+}
+
+function lgnpsscheck(){
+  let parole1 = document.getElementById("rpsw").value;
+  let parole2 = document.getElementById("rpsw2").value;
+
+  if(parole1!==parole2){
+    alert("Paroles nesakrīt :(");
+  }     
+  else{
+    //Pārbauda, vai tāds Lietotāja vārds ir brīvs...
+      let regchkdata = new Object();
+      regchkdata.runame = document.getElementById('runame').value;
+
+      const xhr = new XMLHttpRequest(),
+      method = "POST",
+      url = "http://127.0.0.1:5000/lgnchk";
+  
+        xhr.open(method, url, true);
+        xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText == 'NESAKRIIT'){
+           return registracija();
+           }
+           return alert("Jūsu lietotājvārds jau lieto cits spēlētājs!!!")
+        }
+      }
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  xhr.setRequestHeader("Content-type", "application/json, charset=utf-8");
+  xhr.send(JSON.stringify(regchkdata));
+    }
+  }
+
+
+function registracija(){
+  let regdata = new Object();
+  regdata.reguname = document.getElementById('runame').value;
+  regdata.regpwd =  document.getElementById('rpsw').value;
+    
+  const xhrr = new XMLHttpRequest(),
+    method = "POST",
+    url = "http://127.0.0.1:5000/rgstr";
+
+      xhrr.open(method, url, true);
+      xhrr.onreadystatechange = function () {
+      if(xhrr.readyState == 4 && xhrr.status == 200) {
+        if (xhrr.responseText == 'IZDEVAS'){
+          alert("Reģistrācija izdevas! \n Varāt spēlēt kā "+ regdata.reguname);
+          return ieiet2();
+         }
+         return alert("Viss ir slikti!!! \n Jānospiež F5")
+       }
+    }
+xhrr.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhrr.setRequestHeader("Content-type", "application/json, charset=utf-8");
+xhrr.send(JSON.stringify(regdata));
+}
+
 class Galvaspilsetas {
   constructor() {
     this.izvele = null;
   }
 
   inicializet() {
+    laikss = new Date().getTime();
+
     this.textblock = document.getElementById("textblock");
+    this.textblock.innerHTML = "";
     if (this.textblock) {
       this.divProgres = document.createElement("div");
       this.divProgres.setAttribute("id", "progres");
@@ -128,8 +300,10 @@ class Galvaspilsetas {
         " no " +
         jautajumu_skaits +
         ". <br> <img src='images/congratulation.jpg'>";
+      statistika()
+      }
     }
-  }
+
 
   Random_jautajumi() {
     let sk;
@@ -164,3 +338,51 @@ class Galvaspilsetas {
     }
   }
 }
+
+function statistika(){
+
+  let statok = pareizo_skaits;
+  let jautno = jautajumu_skaits;
+  let datumslaiks = new Date().toLocaleString('lv', {Hours: 'numeric', Minutes: 'long', Secundes: 'numeric'});
+  var laiksb = new Date().getTime();
+  let splslks = Math.round((laiksb - laikss)/1000);
+  let rsltts = Math.round(statok*50000/splslks);
+
+let sttdata = new Object();
+    sttdata.suname = h2.innerText;
+    sttdata.jautno = jautno;
+    sttdata.statok = statok;
+    sttdata.datumslaiks = datumslaiks;
+    sttdata.splslks = splslks;
+    sttdata.rsltts = rsltts;
+/*
+console.log(h2.innerText);//+
+  console.log(statok); //+
+  console.log(jautno);  //+
+  console.log(datumslaiks); //+
+  console.log(laikss);
+  console.log(laiksb);
+  console.log(splslks);
+  console.log(rsltts);
+*/
+  
+const xhrs = new XMLHttpRequest(),
+  method = "POST",
+  url = "http://127.0.0.1:5000/sttstk";
+
+    xhrs.open(method, url, true);
+    xhrs.onreadystatechange = function () {
+    if(xhrs.readyState == 4 && xhrs.status == 200) {
+      if (xhrs.responseText == 'STATOK'){
+        alert("Rezultāti veiksmīgi saglabāti!!!");
+        return reiting();
+       }
+       return alert("Viss ir slikti!!! \n Jānospiež F5")
+     }
+    }
+xhrs.setRequestHeader("Access-Control-Allow-Origin", "*");
+xhrs.setRequestHeader("Content-type", "application/json, charset=utf-8");
+xhrs.send(JSON.stringify(sttdata));
+  
+}
+
