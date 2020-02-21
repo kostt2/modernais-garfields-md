@@ -1,9 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, request, json, jsonify, make_response
 #from flask_cors import CORS, cross_origin
-app = Flask('app')
+app = Flask(__name__)
 #cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 import csv
+
+@app.route('/')
+def root():
+    return render_template('index.html')
+
 # parbaude loginam - vai eksiste user
 @app.route('/yn', methods=['GET', 'POST'])
 def login():
