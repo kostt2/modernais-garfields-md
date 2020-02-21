@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spēle</title>
+    <link rel=stylesheet type="text/css" href="{{ url_for('static', filename='stili.css') }}">
+    <script type="text/javascript" charset="UTF-8" src="{{ url_for('static', filename='vgkvisi.js') }}"></script>
+    <script type="text/javascript" charset="UTF-8" src="{{ url_for('static', filename='main.js') }}"></script>
+  </head>
+  <body>
+    <div id="header">
+      <img src="{{ url_for('static', filename='images/header_img.png') }}"/></a>
+    </div>
+
+    <div id="main">
+      <a href="/">Iziet</a>
+      <div id="left-sidebar">
+        <ul>
+          <li>
+            <button class="poga" onclick="jaunaSpele()">Sākt spēli!</button>
+          </li>
+        </ul>
+      </div>
+
+      <div id="konteiners">
+        <div id="textblock">
+          <h1>Par spēli</h1>
+          <img src="{{ url_for('static', filename='images/knb.jpg') }}" alt="Kuroko and Nigou" />
+          <p>
+            Pilsētu kultūra, valodas un tradīcijas ir ļoti dažādas un
+            atšķirīgas, bet vai tu vari atpazīt šo valstu galvaspilsētas,
+            paskatoties uz karogu? Izpildi testu un pārbaudi savas ģeogrāfijas
+            zināšanas!
+          </p>
+        </div>
+      </div>
+
+      <div id="right-sidebar">
+        <div class="browser">
+          <a href="https://www.youtube.com/user/jaunogeografuskola" target="_blank">
+            <img src="{{ url_for('static', filename='images/youtubelogo.jpg') }}" alt="YouTube" />
+          </a>
+
+          <a href="https://www.facebook.com/pg/Jauno.geografu.skola/about/" target="_blank">
+            <img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Deviantart" />
+          </a>
+
+          <a href="https://twitter.com/jgs_lv" target="_blank">
+            <img src="{{ url_for('static', filename='images/twitterlogo.jpg') }}" alt="Twitter" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>&copy Modernais Garfields</p>
+    </div>
+  </body>
+</html>

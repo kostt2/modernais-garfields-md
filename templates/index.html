@@ -3,29 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <title>Spēle</title>
-    <link rel=stylesheet type="text/css" href="{{ url_for('static', filename='stili.css') }}">
-    <script type="text/javascript" charset="UTF-8" src="{{ url_for('static', filename='vgkvisi.js') }}"></script>
-    <script type="text/javascript" charset="UTF-8" src="{{ url_for('static', filename='main.js') }}"></script>
+    <link rel="stylesheet" href="static/stili.css" />
+    <script type="text/javascript" charset="UTF-8" src="static/vgkvisi.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="static/main.js"></script>
+    <link href="{{ url_for('static',filename='favicon.ico')}}" rel="icon" type="image/x-icon"/>
   </head>
-  <body>
+  <body onload="lasiChatu();" class="body">
+    <script src="{{ url_for('static',filename='chats.js')}}" type="text/javascript"></script>
     <div id="header">
-      <img src="{{ url_for('static', filename='images/header_img.png') }}"/></a>
+      <a href="index.html"><img src="static/images/header_img.png"/></a>
     </div>
 
     <div id="main">
-      <a href="/">Iziet</a>
       <div id="left-sidebar">
-        <ul>
+        <form onsubmit="return false">
+          <div class="login">
+            <input type="text" placeholder="Lietotāja vārds" id="uname" required>        
+            <input type="password" placeholder="Parole" id="psw" required>            
+            <button class="poga" onclick="login()">Ieiet</button>
+          </div>      
+        </form>
+        <hr>
+        <button class="poga" onclick="document.getElementById('idRegistracija').style.display='block'">Reģistrēties</button>
+        <button class="poga" onclick="neregistrejoties()" title="Sākt spēli bez reģistrācijas">Sākt tagad</button>  
+
+        <div id="idRegistracija" class="modal">
+          <!--<span onclick="document.getElementById('idRegistracija').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+          <form onsubmit="return false" class="modal-content animate">
+            <div class="container">
+              <input type="text" placeholder="Lietotāja vārds" id="runame" required>
+              <input type="password" placeholder="Parole" id="rpsw" required>
+              <input type="password" placeholder="Parole atkārtoti" id="rpsw2" required>  
+              <button type="submit" class="poga" onclick="lgnpsscheck()">Reģistrēties</button>
+              <button type="button" class="poga" onclick="document.getElementById('idRegistracija').style.display='none'" class="cancelbtn">Atcelt</button>              
+              <!--<p align="center">* Ja nevēlaties reģistrēties, izmantojiet&emsp;<i>Lietotāja vārds:</i><b><i>Viesis</i></b>&emsp;<i>Parole:</i><b><i>Viesis</i></b></p><br>-->
+            </div>        
+          </form>
+        </div>
+
+        <!--<ul>
           <li>
             <button class="poga" onclick="jaunaSpele()">Sākt spēli!</button>
           </li>
-        </ul>
+        </ul>-->
       </div>
 
       <div id="konteiners">
         <div id="textblock">
           <h1>Par spēli</h1>
-          <img src="{{ url_for('static', filename='images/knb.jpg') }}" alt="Kuroko and Nigou" />
+          <img src="static/images/knb.jpg" alt="Kuroko and Nigou" />
           <p>
             Pilsētu kultūra, valodas un tradīcijas ir ļoti dažādas un
             atšķirīgas, bet vai tu vari atpazīt šo valstu galvaspilsētas,
@@ -37,17 +63,31 @@
 
       <div id="right-sidebar">
         <div class="browser">
+          <div id="chats">
+
+
+          </div>
+          
+          <div>
+              <input id="zinja" placeholder="Ievadi savu zinu!" type="text">
+              <button onclick="suutiZinju()" type="button">Sūtīt</button>
+          </div>
+            </br>
           <a href="https://www.youtube.com/user/jaunogeografuskola" target="_blank">
-            <img src="{{ url_for('static', filename='images/youtubelogo.jpg') }}" alt="YouTube" />
+            <img src="static/images/youtubelogo.jpg" alt="YouTube" />
           </a>
 
           <a href="https://www.facebook.com/pg/Jauno.geografu.skola/about/" target="_blank">
-            <img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Deviantart" />
+            <img src="static/images/facebook.png" alt="Deviantart" />
           </a>
 
           <a href="https://twitter.com/jgs_lv" target="_blank">
-            <img src="{{ url_for('static', filename='images/twitterlogo.jpg') }}" alt="Twitter" />
+            <img src="static/images/twitterlogo.jpg" alt="Twitter" />
           </a>
+
+          {% block saturs %}
+
+          {% endblock %}
         </div>
       </div>
     </div>
