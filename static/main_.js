@@ -86,7 +86,7 @@ function reiting(){
   qry.uname = h2.innerHTML;      
   const xhr = new XMLHttpRequest(),
     method = 'POST',
-    url = '/qry';
+    url = 'https://md-gr.herokuapp.com/qry';
       xhr.open(method, url, true);
       xhr.onreadystatechange = function () {
       if(xhr.readyState == 4 && xhr.status == 200) {
@@ -106,7 +106,7 @@ function login(){
   lgndata.pwd =  document.getElementById('psw').value ;
     const xhr = new XMLHttpRequest(),
     method = 'POST',
-    url = '/yn';
+    url = 'https://md-gr.herokuapp.com/yn';
       xhr.open(method, url, true);
       xhr.onreadystatechange = function () {
       if(xhr.readyState == 4 && xhr.status == 200) {
@@ -133,7 +133,7 @@ function lgnpsscheck(){
       regchkdata.runame = document.getElementById('runame').value;
       const xhr = new XMLHttpRequest(),
       method = 'POST',
-      url = '/lgnchk';
+      url = 'https://md-gr.herokuapp.com/lgnchk';
         xhr.open(method, url, true);
         xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
@@ -155,7 +155,7 @@ function registracija(){
   regdata.regpwd =  document.getElementById('rpsw').value;
   const xhrr = new XMLHttpRequest(),
     method = 'POST',
-    url = '/rgstr';
+    url = 'https://md-gr.herokuapp.com/rgstr';
       xhrr.open(method, url, true);
       xhrr.onreadystatechange = function () {
       if(xhrr.readyState == 4 && xhrr.status == 200) {
@@ -336,7 +336,7 @@ function statistika(){
   
 const xhrs = new XMLHttpRequest(),
   method = 'POST',
-  url = '/sttstk';
+  url = 'https://md-gr.herokuapp.com/sttstk';
     xhrs.open(method, url, true);
     xhrs.onreadystatechange = function () {
     if(xhrs.readyState == 4 && xhrs.status == 200) {
