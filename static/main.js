@@ -19,12 +19,97 @@ function jaunaSpele() {
 }
 
 function maniTop10(){
-
+    var tabheadmytop = ["Jautājumu daudzums","Atbildes","Datums un laiks","Spēles ilgums","Rezultāts"]
+    let s = {"uname":h2.innerHTML};
+    console.log(s);
+    const url = '/mytop';
+    let request = new Request (url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(s)
+    });
+    fetch(request)
+      .then((resp)=>resp.json())
+      .then((data)=>{
+        console.log(data.mytopten);
+        var myTopTen = data.mytopten;
+        var col = [];
+        for (var i = 0; i < myTopTen.length; i++) {
+            for (var key in myTopTen[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+        var table = document.createElement("table");
+        var tr = table.insertRow(-1);
+        for (var i = 0; i < tabheadmytop.length; i++) { // tabulas galvene
+            var th = document.createElement("th");
+            th.innerHTML = tabheadmytop[i];
+            tr.appendChild(th);
+        }
+        for (var i = 0; i < myTopTen.length && i < 10; i++) { // cik rindas tabulaa
+            tr = table.insertRow(-1);
+            for (var j = 1; j < col.length; j++) { //kolonnas
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = myTopTen[i][col[j]];
+            }
+        }
+        var textblock = document.getElementById("MansTop10");
+        this.textblock.innerHTML = "<h1>Mani Top 10</h1>";
+        this.textblock.appendChild(table);
+     });;
 }
+
 
 function Top10(){
-
+  var tabheadalltop = ["Lietotājs","Jautājumu daudzums","Atbildes","Datums un laiks","Spēles ilgums","Rezultāts"]
+  let s = {"uname":h2.innerHTML};
+  console.log(s);
+  const url = '/alltop';
+  let request = new Request (url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(s)
+  });
+  fetch(request)
+    .then((resp)=>resp.json())
+    .then((data)=>{
+      console.log(data.alltopten);
+      var allTopTen = data.alltopten;
+      var col = [];
+      for (var i = 0; i < allTopTen.length; i++) {
+          for (var key in allTopTen[i]) {
+              if (col.indexOf(key) === -1) {
+                  col.push(key);
+              }
+          }
+      }
+      var table = document.createElement("table");
+      var tr = table.insertRow(-1);
+      for (var i = 0; i < tabheadalltop.length; i++) { // tabulas galvene
+          var th = document.createElement("th");
+          th.innerHTML = tabheadalltop[i];
+          tr.appendChild(th);
+      }
+      for (var i = 0; i < 10; i++) { // cik rindas tabulaa
+          tr = table.insertRow(-1);
+          for (var j = 0; j < col.length; j++) { //kolonnas
+              var tabCell = tr.insertCell(-1);
+              tabCell.innerHTML = allTopTen[i][col[j]];
+          }
+      }
+      var textblock = document.getElementById("MansTop10");
+      this.textblock.innerHTML = "<h1>Kopīgs Top 10</h1>";
+      this.textblock.appendChild(table);
+   });;
 }
+
+
 
 function ieiet_visiem(){
   this.leftBox = document.getElementById("left-sidebar");
@@ -80,25 +165,6 @@ function ieiet2(){
   ieiet_visiem();
   h2.innerHTML = LietotajaVards;
 }
-
-function reiting(){
-  let qry = new Object();
-  qry.uname = h2.innerHTML;      
-  const xhr = new XMLHttpRequest(),
-    method = 'POST',
-    url = '/qry';
-      xhr.open(method, url, true);
-      xhr.onreadystatechange = function () {
-      if(xhr.readyState == 4 && xhr.status == 200) {
-        if (xhr.responseText == 'OK'){
-          alert("OK"+ h2.innerHTML);
-         }
-      }
-    }
-xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-xhr.setRequestHeader("Content-type", "application/json, charset=utf-8");
-xhr.send(JSON.stringify(qry));
-} 
 
 function login(){
   let lgndata = new Object();
@@ -318,13 +384,23 @@ class Galvaspilsetas {
   }
 }
 
+
+
 function statistika(){
   let statok = pareizo_skaits;
   let jautno = jautajumu_skaits;
   let datumslaiks = new Date().toLocaleString('lv', {Hours: 'numeric', Minutes: 'long', Secundes: 'numeric'});
   var laiksb = new Date().getTime();
   let splslks = Math.round((laiksb - laikss)/1000);
-  let rsltts = Math.round(statok*50000/splslks);
+  let trsltts = Math.round(statok*50000/splslks);
+  let needLength =  5;
+  trsltts = String(trsltts);
+  while (trsltts.length < needLength) {
+    trsltts = "0" + trsltts;
+  }
+  let rsltts = trsltts
+  console.log (rsltts)
+   
   
   let sttdata = new Object();
     sttdata.suname = h2.innerText;
@@ -341,11 +417,11 @@ const xhrs = new XMLHttpRequest(),
     xhrs.onreadystatechange = function () {
     if(xhrs.readyState == 4 && xhrs.status == 200) {
       if (xhrs.responseText == 'STATOK'){
-        alert("Rezultāti veiksmīgi saglabāti!!!");
-        return reiting();
+        return console.log ("Rezultāti veiksmīgi saglabāti!!!");
+//        return reiting();
        }
-       return alert("Viss ir slikti!!! \n Jānospiež F5")
-     }
+       return console.log ("Viss ir slikti!!! \n Jānospiež F5")
+       }
     }
 xhrs.setRequestHeader("Access-Control-Allow-Origin", "*");
 xhrs.setRequestHeader("Content-type", "application/json, charset=utf-8");

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request, json, jsonify, make_response
+from operator import itemgetter
 app = Flask(__name__)
 import csv
+
 
 @app.route('/')
 def root():
@@ -82,13 +84,13 @@ def sttstk():
    addrsltts = j['rsltts']
    
    with open('statistika.csv', 'a', newline="", encoding='UTF-8') as csvfile:
-     csv_writer = csv.writer(csvfile, delimiter=';')
+     csv_writer = csv.writer(csvfile, delimiter=',')
      addstt = [ addsuname, addjautno, addstatok, adddatumslaiks, addsplslks, addrsltts]
      csv_writer.writerow(addstt)
      csvfile.close()
      
      with open('statistika.csv', 'r', encoding='UTF-8') as csvfile:
-       csv_reader = csv.reader(csvfile, delimiter = ';')
+       csv_reader = csv.reader(csvfile, delimiter = ',')
        for row in csv_reader:
           if row[0]==addsuname and row[3]==adddatumslaiks:
             sttstk = True
@@ -100,29 +102,43 @@ def sttstk():
         myresp = 'NEIZDEVAS'
    return (myresp)
    
-# atlase 
-@app.route('/qry', methods=['POST'])
-def qry():
-   qry = False
-   j=json.loads(request.data)
-   with open('statistika.csv', 'r', encoding='UTF-8') as csvfile:
-      csv_reader = csv.reader(csvfile, delimiter = ';')
-      qryx = j['uname']
-      for row in csv_reader:
-         if qryx in row[0]:
-            qry = True
-# ierakstam izveletos datus datne
-            with open('qryx.csv', 'a', newline="", encoding='UTF-8') as csvfile:
-                csv_writer = csv.writer(csvfile, delimiter=';')
-                addqry = [row]
-                csv_writer.writerows(addqry)
-                csvfile.close()   
-   if qry == True:
-        myresp = 'STATOK'
-   else:
-        myresp = 'NEIZDEVAS'
-   return (myresp)
+# myTop10
+@app.route('/mytop', methods=['POST'])
+def mytop():
+   data=request.json
+   mtuname=data["uname"]
+   print(mtuname)
+   f = open('statistika.csv', 'r', newline="", encoding='UTF-8')
+   reader = csv.DictReader( f, fieldnames = ( "0.","1.","2.","3.","4.","5."))
+   out = json.dumps( [obj for obj in reader if(obj['0.'] == mtuname)], indent=2)
+   f.close()
+   saraksts=json.loads(out)
+   ssaraksts=sorted(saraksts, key=lambda i: (i['5.'], i['3.']), reverse=True) 
+   print (ssaraksts)
+   response = {
+            'mytopten': ssaraksts
+   }
+   print(response)
+   return json.dumps(response, indent=2)
 
+# Top10
+@app.route('/alltop', methods=['POST'])
+def alltop():
+   data=request.json
+   mtuname=data["uname"]
+   print(mtuname)
+   f = open('statistika.csv', 'r', newline="", encoding='UTF-8')
+   reader = csv.DictReader( f, fieldnames = ( "1.","2.","3.","4.","5.","6."))
+   out = json.dumps( [obj for obj in reader ], indent=2)
+   f.close()
+   saraksts=json.loads(out)
+   ssaraksts=sorted(saraksts, key=lambda i: (i['6.'], i['4.']), reverse=True) 
+   print (ssaraksts)
+   response = {
+            'alltopten': ssaraksts
+   }
+   print(response)
+   return json.dumps(response, indent=2)
 
 @app.route('/chats/lasi')
 def ielasit_chatu():

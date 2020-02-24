@@ -306,3 +306,18 @@ margin-right: 0px;
     height:200px;
     size: 500;
 }
+
+th, td, p, input {
+    font:14px Verdana;
+}
+table, th, td 
+{
+    border: solid 1px #DDD;
+    border-collapse: collapse;
+    padding: 2px 3px;
+    text-align: center;
+    width:100%; 
+}
+th {
+    font-weight:bold;
+}
