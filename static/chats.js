@@ -8,6 +8,11 @@ async function lasiChatu(){
     await lasiChatu();
 }
 
+function updateScroll(){
+    var element = document.getElementById("chats");
+    element.scrollTop = element.scrollHeight;
+}
+
 function radiChatuVienkarsi(dati){
     const jaunaRinda = "</br>"
     let chats = "";
