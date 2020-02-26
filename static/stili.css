@@ -323,7 +323,6 @@ th {
 }
 
 #chats {
-    margin: 10px;
     background-color: rgb(255,255,255);
     width: 169px;
     height:150px;
@@ -336,7 +335,6 @@ th {
 }
 
 #zinja {
-    margin: 10px;
     background-color: rgb(255,255,255);
     width: 169px;
 }
