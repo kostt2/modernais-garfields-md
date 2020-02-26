@@ -327,6 +327,7 @@ th {
     width: 169px;
     height:150px;
     overflow: scroll;
+    overflow-x:hidden;
 }
 
 .scroll   {
