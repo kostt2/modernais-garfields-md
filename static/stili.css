@@ -321,3 +321,7 @@ table, th, td
 th {
     font-weight:bold;
 }
+
+#chats {
+    padding: 10px;
+}
